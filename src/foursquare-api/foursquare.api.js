@@ -1,8 +1,18 @@
 export class Foursquare {
-    getTrendingVenues() {
+    getTrendingVenues(params) {
         return new Promise((resolve, reject) => {
+
+            let qs = "?";
+            let paramArray = [];
+
+            for (let param in params) {
+                paramArray.push(`${param}=${params[param]}`);
+            }
+
+            qs += paramArray.join("&");
+
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://api.foursquare.com/v2/venues/trending');
+            xhr.open('GET', `https://api.foursquare.com/v2/venues/trending${qs}`);
 
             xhr.onerror = err => {
                 reject(err);
@@ -29,10 +39,20 @@ export class Foursquare {
         });
     }
 
-    getRecommendedVenues() {
+    getRecommendedVenues(params) {
         return new Promise((resolve, reject) => {
+
+            let qs = "?";
+            let paramArray = [];
+
+            for (let param in params) {
+                paramArray.push(`${param}=${params[param]}`);
+            }
+
+            qs += paramArray.join("&");
+
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', `https://api.foursquare.com/v2/venues/explore`);
+            xhr.open('GET', `https://api.foursquare.com/v2/venues/explore${qs}`);
 
             xhr.onerror = err => {
                 reject(err);

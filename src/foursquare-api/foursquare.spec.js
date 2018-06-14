@@ -28,7 +28,7 @@ describe('Foursquare API', function () {
     });
 
     it('retrieves retrieves trending venues from foursquare', function (done) {
-        foursquare.getTrendingVenues()
+        foursquare.getTrendingVenues({near: "London"})
             .then(trendingVenues => {
                 expect(trendingVenues).toEqual(dummyTrending);
                 done();
@@ -39,15 +39,15 @@ describe('Foursquare API', function () {
             });
 
         let request = jasmine.Ajax.requests.mostRecent();
-        expect(request.url).toBe('https://api.foursquare.com/v2/venues/trending');
+        expect(request.url).toBe('https://api.foursquare.com/v2/venues/trending?near=London');
         expect(request.method).toBe('GET');
         request.respondWith(dummyTrendingResponse);
     });
 
     it('retrieves any recommendations from foursquare', function (done) {
-        foursquare.getRecommendedVenues()
-            .then(recommendedVanues => {
-                expect(recommendedVanues).toEqual(dummyRecommended);
+        foursquare.getRecommendedVenues({near: "London"})
+            .then(recommendedVenues => {
+                expect(recommendedVenues).toEqual(dummyRecommended);
                 done();
             })
             .catch(err => {
@@ -56,7 +56,7 @@ describe('Foursquare API', function () {
             });
 
         let request = jasmine.Ajax.requests.mostRecent();
-        expect(request.url).toBe('https://api.foursquare.com/v2/venues/explore');
+        expect(request.url).toBe('https://api.foursquare.com/v2/venues/explore?near=London');
         expect(request.method).toBe('GET');
         request.respondWith(dummyRecommendedResponse);
     });
