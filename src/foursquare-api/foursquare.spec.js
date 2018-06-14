@@ -30,7 +30,7 @@ describe('Foursquare API', function () {
     it('retrieves retrieves trending venues from foursquare', function (done) {
         foursquare.getTrendingVenues({near: "London"})
             .then(trendingVenues => {
-                expect(trendingVenues).toEqual(dummyTrending);
+                expect(trendingVenues).toEqual(dummyTrending.response.venues);
                 done();
             })
             .catch(err => {
@@ -47,7 +47,7 @@ describe('Foursquare API', function () {
     it('retrieves any recommendations from foursquare', function (done) {
         foursquare.getRecommendedVenues({near: "London"})
             .then(recommendedVenues => {
-                expect(recommendedVenues).toEqual(dummyRecommended);
+                expect(recommendedVenues).toEqual(dummyRecommended.response.groups[0].items);
                 done();
             })
             .catch(err => {
