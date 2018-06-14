@@ -10,10 +10,31 @@ searchForm.addEventListener('submit', function (evt) {
     let target = document.querySelector('#results');
 
     if (document.querySelector('#trending').checked) {
-        console.log('doing things');
         foursquare.getTrendingVenues({ near: location })
             .then(venues => {
-                console.dir(venues);
+                target.innerHTML = "";
+                for (let venue of venues) {
+                    let listItem = document.createElement('a');
+                    //TODO: google maps link?
+                    // listItem.href = 
+                    let categories = [];
+
+                    for (let category of venue.categories) {
+                        categories.push(category.name);
+                    }
+
+                    listItem.className = `list-group-item list-group-item-action flex-column align-items-start`;
+                    listItem.innerHTML = `<div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">${venue.name}</h5>
+                                            <small>${categories.join(", ")}</small>
+                                        </div>
+                                        <small>${venue.location.formattedAddress.join(", ")}</small>
+                                        `;
+                    target.appendChild(listItem);
+                }
+            })
+            .catch(err => {
+                target.innerHTML = "<p>Sorry we couldn't recognise that location</p>";
             });
     } else {
         foursquare.getRecommendedVenues({ near: location })
@@ -23,15 +44,25 @@ searchForm.addEventListener('submit', function (evt) {
                     let listItem = document.createElement('a');
                     //TODO: google maps link?
                     // listItem.href = 
+
+                    let categories = [];
+
+                    for (let category of entry.venue.categories) {
+                        categories.push(category.name);
+                    }
+
                     listItem.className = `list-group-item list-group-item-action flex-column align-items-start`;
                     listItem.innerHTML = `<div class="d-flex w-100 justify-content-between">
                                             <h5 class="mb-1">${entry.venue.name}</h5>
-                                            <small>${entry.reasons.items[0].summary}</small>
+                                            <small>${categories}</small>
                                         </div>
                                         <small>${entry.venue.location.address}, ${entry.venue.location.city}, ${entry.venue.location.country}</small>
                                         `;
                     target.appendChild(listItem);
                 }
+            })
+            .catch(err => {
+                target.innerHTML = "<p>Sorry we couldn't recognise that location</p>";
             });
     }
 })
