@@ -28,7 +28,7 @@ export class Foursquare {
                 if (xhr.status == 200 && xhr.responseText) {
                     try {
                         let data = JSON.parse(xhr.responseText);
-                        resolve(data);
+                        resolve(data.response.venues);
                     } catch (e) {
                         reject({ error: e, data: xhr.responseText });
                     }
@@ -68,7 +68,7 @@ export class Foursquare {
                 if (xhr.status == 200 && xhr.responseText) {
                     try {
                         let data = JSON.parse(xhr.responseText);
-                        resolve(data);
+                        resolve(data.response.groups[0].items);
                     } catch (e) {
                         reject({ error: e, data: xhr.responseText });
                     }
