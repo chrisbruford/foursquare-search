@@ -39,7 +39,7 @@ describe('Foursquare API', function () {
             });
 
         let request = jasmine.Ajax.requests.mostRecent();
-        expect(request.url).toBe('https://api.foursquare.com/v2/venues/trending?near=London');
+        expect(request.url).toBe('/api/foursquare/trending?near=London');
         expect(request.method).toBe('GET');
         request.respondWith(dummyTrendingResponse);
     });
@@ -56,7 +56,7 @@ describe('Foursquare API', function () {
             });
 
         let request = jasmine.Ajax.requests.mostRecent();
-        expect(request.url).toBe('https://api.foursquare.com/v2/venues/explore?near=London');
+        expect(request.url).toBe('/api/foursquare/recommended?near=London');
         expect(request.method).toBe('GET');
         request.respondWith(dummyRecommendedResponse);
     });
