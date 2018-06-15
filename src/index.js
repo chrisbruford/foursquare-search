@@ -12,6 +12,10 @@ searchForm.addEventListener('submit', function (evt) {
     if (document.querySelector('#trending').checked) {
         foursquare.getTrendingVenues({ near: location })
             .then(venues => {
+                if (!venues || venues.length === 0) {
+                    return target.innerHTML = "<p>Sorry we couldn't find any venues there</p>";
+                }
+
                 target.innerHTML = "";
                 for (let venue of venues) {
                     let listItem = document.createElement('a');
@@ -45,6 +49,9 @@ searchForm.addEventListener('submit', function (evt) {
         foursquare.getRecommendedVenues({ near: location })
             .then(group => {
                 target.innerHTML = "";
+                if (group && group.length === 0) {
+                    return target.innerHTML = "<p>Sorry we couldn't find any venues there</p>";
+                }
                 for (let entry of group) {
                     let listItem = document.createElement('a');
                     //TODO: google maps link?
