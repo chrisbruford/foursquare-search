@@ -141,12 +141,32 @@ export let dummyTrending = {
     }
 }
 
+export let dummyLocationError = {
+    "meta": {
+        "code": 400,
+        "errorType": "failed_geocode",
+        "errorDetail": "Couldn't geocode param near: asasdad",
+        "requestId": "5b235ee96a607176a57e64b4"
+    },
+    "response": {}
+}
+
 export let dummyTrendingResponse = {
     status: 200,
     responseText: JSON.stringify(dummyTrending)
-};
+}
 
 export let dummyRecommendedResponse = {
     status: 200,
     responseText: JSON.stringify(dummyRecommended)
+}
+
+export let dummyLocationErrorResponse = {
+    status: 200,
+    responseText: JSON.stringify(dummyLocationError)
+}
+
+export let dummy404 = {
+    status: 404,
+    statusText: "Page not found"
 }

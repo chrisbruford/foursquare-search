@@ -34,7 +34,12 @@ searchForm.addEventListener('submit', function (evt) {
                 }
             })
             .catch(err => {
-                target.innerHTML = "<p>Sorry we couldn't recognise that location</p>";
+                if (err == "failed_geocode") { 
+                    target.innerHTML = "<p>Sorry we couldn't recognise that location</p>";
+                }
+                else {
+                    target.innerHTML = "<p>Sorry something went wrong. Please try again later or contact support.</p>";
+                }
             });
     } else {
         foursquare.getRecommendedVenues({ near: location })
@@ -62,7 +67,12 @@ searchForm.addEventListener('submit', function (evt) {
                 }
             })
             .catch(err => {
-                target.innerHTML = "<p>Sorry we couldn't recognise that location</p>";
+                if (err == "failed_geocode") { 
+                    target.innerHTML = "<p>Sorry we couldn't recognise that location</p>";
+                }
+                else {
+                    target.innerHTML = "<p>Sorry something went wrong. Please try again later or contact support.</p>";
+                }
             });
     }
 })
