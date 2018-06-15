@@ -4,7 +4,7 @@ const router = express.Router();
 const path = require('path');
 const request = require('request');
 
-router.get('/trending', function(req, res, next) {
+router.get('/trending', function (req, res, next) {
     //only take params of interested
     let qs = {
         client_id: process.env.client_id,
@@ -19,13 +19,13 @@ router.get('/trending', function(req, res, next) {
         url,
         method: 'GET',
         qs
-    }, (err, response, body)=>{
+    }, (err, response, body) => {
         if (err) { response.sendStatus(500); }
         res.send(body);
     });
 });
 
-router.get('/recommended', function(req, res, next) {
+router.get('/recommended', function (req, res, next) {
     //only take params of interested
     let qs = {
         client_id: process.env.client_id,
@@ -40,10 +40,10 @@ router.get('/recommended', function(req, res, next) {
         url,
         method: 'GET',
         qs
-    }, (err, response, body)=>{
-        if (err) { response.sendStatus(500); }
+    }, (err, response, body) => {
+        if (err) { res.sendStatus(500); }
         res.send(body);
     });
-  });
+});
 
 module.exports = router;
